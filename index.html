@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamental Theorem of Calculus</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0"></script>
+</head>
+<body>
+<header>
+  <div class="container">
+    <p class="eyebrow">Interactive Learning Media</p>
+    <h1>Fundamental Theorem of Calculus</h1>
+    <p class="lead">ลอง “มองเห็น” ว่า Integral และ Derivative เชื่อมโยงกันอย่างไร</p>
+    <a class="button" href="#part1">เริ่มเรียนรู้ ↓</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="intro card">
+    <h2>ก่อนเริ่ม: Calculus กำลังบอกอะไรเรา?</h2>
+    <p><strong>Integral</strong> มองการสะสม เช่น พื้นที่ใต้กราฟ ส่วน <strong>Derivative</strong> มองอัตราการเปลี่ยนแปลง</p>
+    <p class="question">แล้วถ้าเราสะสมพื้นที่ไปเรื่อย ๆ อัตราที่พื้นที่เพิ่มขึ้นจะเกี่ยวข้องกับกราฟเดิมอย่างไร?</p>
+  </section>
+
+  <section id="part1" class="card">
+    <div class="section-title">
+      <span>01</span>
+      <div>
+        <h2>FTC Part 1</h2>
+        <p>การสะสมพื้นที่ เมื่อมอง “อัตราการเพิ่ม” จะย้อนกลับมาเป็นฟังก์ชันเดิม</p>
+      </div>
+    </div>
+    <div class="formula">F(x) = ∫<sub>a</sub><sup>x</sup> f(t) dt &nbsp;&nbsp; → &nbsp;&nbsp; <strong>F′(x) = f(x)</strong></div>
+
+    <div class="grid">
+      <div>
+        <canvas id="chart1"></canvas>
+      </div>
+      <div class="controls">
+        <label for="xSlider">เลื่อนค่า x</label>
+        <input id="xSlider" type="range" min="0.5" max="4" step="0.01" value="2">
+        <div class="value">x = <span id="xValue">2.00</span></div>
+        <div class="stat"><span>พื้นที่สะสม F(x)</span><strong id="areaValue">0.00</strong></div>
+        <div class="stat"><span>f(x)</span><strong id="fxValue">0.00</strong></div>
+        <p id="part1Message" class="message">กำลังสะสมพื้นที่ใต้กราฟจาก a ถึง x</p>
+      </div>
+    </div>
+    <div class="insight">
+      <strong>สิ่งที่ควรเห็น:</strong> เมื่อ x ขยับ พื้นที่สะสมเปลี่ยนไป และอัตราการเปลี่ยนของพื้นที่ ณ จุดนั้นสัมพันธ์กับความสูงของกราฟ
+    </div>
+  </section>
+
+  <section id="part2" class="card">
+    <div class="section-title">
+      <span>02</span>
+      <div>
+        <h2>FTC Part 2</h2>
+        <p>พื้นที่ทั้งหมดในช่วงหนึ่ง หาได้จากความแตกต่างของ Antiderivative ที่ปลายช่วง</p>
+      </div>
+    </div>
+    <div class="formula"><strong>∫<sub>a</sub><sup>b</sup> f(x) dx = F(b) − F(a)</strong></div>
+
+    <div class="grid">
+      <div><canvas id="chart2"></canvas></div>
+      <div class="controls center">
+        <p>ช่วงที่สนใจ: <strong>a = 1</strong> และ <strong>b = 3</strong></p>
+        <button id="animateBtn" class="button">▶ Start Animation</button>
+        <button id="resetBtn" class="button secondary">↻ Reset</button>
+        <div id="animationText" class="animation-box">กด Start Animation เพื่อดูความสัมพันธ์ทีละขั้น</div>
+        <div class="equation-box">
+          <div>พื้นที่ใต้กราฟ = <span id="integralDisplay">?</span></div>
+          <div>F(b) − F(a) = <span id="differenceDisplay">?</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card compare">
+    <h2>FTC Part 1 vs Part 2</h2>
+    <div class="compare-grid">
+      <div>
+        <h3>Part 1</h3>
+        <p>สะสมพื้นที่ → ดูอัตราการเพิ่ม → Derivative</p>
+        <div class="mini-formula">F′(x) = f(x)</div>
+      </div>
+      <div>
+        <h3>Part 2</h3>
+        <p>ต้องการการสะสมทั้งหมด → ใช้ Antiderivative ที่ปลายช่วง</p>
+        <div class="mini-formula">∫ f(x) dx = F(b) − F(a)</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="summary">
+    <h2>แล้ว FTC กำลังบอก “ความจริง” อะไร?</h2>
+    <div class="big-idea">
+      <div>DERIVATIVE</div><span>↕</span><div>INTEGRAL</div>
+    </div>
+    <p><strong>FTC Part 1:</strong> ถ้าเราสร้างฟังก์ชันจากการสะสมพื้นที่ อัตราการเปลี่ยนแปลงของมันจะกลับมาเป็น f(x)</p>
+    <p><strong>FTC Part 2:</strong> การสะสมทั้งหมดระหว่าง a และ b หาได้จาก F(b) − F(a)</p>
+    <p class="final-message">พูดสั้น ๆ: <strong>Derivative และ Integral เป็นกระบวนการที่ย้อนกลับกัน</strong></p>
+  </section>
+</main>
+
+<footer>Interactive FTC • สื่อการสอนเพื่อสร้างความเข้าใจเชิงภาพ</footer>
+<script src="script.js"></script>
+</body>
+</html>
